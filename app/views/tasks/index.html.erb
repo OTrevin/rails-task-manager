@@ -1,0 +1,7 @@
+<h2>My Tasks</h2>
+
+<ul style="list-style: none; padding-inline-start: 0px;">
+  <% @tasks.each do |task| %>
+    <li> <input type="checkbox"><%= task.title %></li>
+  <% end %>
+</ul>
