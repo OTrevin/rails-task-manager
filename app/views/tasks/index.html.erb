@@ -2,6 +2,12 @@
 
 <ul style="list-style: none; padding-inline-start: 0px;">
   <% @tasks.each do |task| %>
-    <li> <input type="checkbox"><%= task.title %></li>
+    <% if task.completed == true %>
+      <li> <input type="checkbox" checked><%= link_to task.title, task_path(task)%></li>
+      <% else %>
+      <li> <input type="checkbox"><%= link_to task.title, task_path(task)%></li>
+    <% end %>
   <% end %>
+  <p> <%= link_to "Add a new task", new_task_path %> </p>
+
 </ul>

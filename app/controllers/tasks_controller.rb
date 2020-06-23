@@ -1,15 +1,46 @@
+# this is a class comment to remove the rubocop
 class TasksController < ApplicationController
-
   # Create a new Task
-  # def create
-  #   @task = Task.create(tittle)
-  # end
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    @task.save
+    redirect_to tasks_path(@task)
+  end
+
   # Read all tasks
   def index
     @tasks = Task.all
   end
 
-  # Update a task
+  def show
+    @task = Task.find(params[:id])
+  end
+
+  # Update or edit a task
+  def edit
+    @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+    redirect_to tasks_path(@task)
+  end
 
   # Delete a task
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:title, :details, :completed)
+  end
 end
